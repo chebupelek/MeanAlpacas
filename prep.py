@@ -4,8 +4,6 @@ import argparse
 import pandas as pd
 import numpy as np
 from collections import Counter
-import sys
-sys.stdout.reconfigure(encoding='utf-8')
 
 def clean_numeric_column(series):
     try:
@@ -31,7 +29,7 @@ def main(input_file, output_file):
 
     # Fill missing values - FIXED CHAINED ASSIGNMENT WARNING
     for col in df.columns:
-        df[col] = df[col].fillna("mt")
+        df[col] = df[col].fillna(0)
 
     # Handle gender mapping properly
     if 'gender' in df.columns:
@@ -107,7 +105,7 @@ def main(input_file, output_file):
     # Save processed data
     df.to_csv(output_file, index=False)
 
-    print(f"Processed data saved to {output_file}")
+    print(f"\n✅ Processed data saved to {output_file}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Preprocess income dataset for machine learning.")
